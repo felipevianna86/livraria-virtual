@@ -23,7 +23,11 @@ public class LivroRepository {
 	public Livro getLivroByIsbn(String isbn) {
 		Optional<Livro> livro = livros.values().stream().filter(l -> l.getIsbn().equals(isbn)).findAny();
 		
-		return livro.orElse(null);
+		if(!livro.isPresent()) {
+			throw new LivroNaoEncontradoException();
+		}
+		
+		return livro.get();
 	}
 
 }
