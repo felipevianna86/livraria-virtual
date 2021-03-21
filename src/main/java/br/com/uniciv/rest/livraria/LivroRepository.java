@@ -10,7 +10,17 @@ public class LivroRepository {
 	
 	private Map<Long, Livro> livros = new HashMap<>();
 	
-	public LivroRepository() {
+	private static LivroRepository repository;
+	
+	public static LivroRepository getInstance() {
+		if(repository == null) {
+			repository = new LivroRepository();
+		}
+		
+		return repository;
+	}
+	
+	private LivroRepository() {
 		Livro livro1 = new Livro(1L,"Livro A", "ISBN-123", "GENERO A", 19.99, "Autor 1");
 		
 		livros.put(livro1.getId(), livro1);
@@ -35,6 +45,12 @@ public class LivroRepository {
 			throw new LivroExistenteException();
 		}
 		livros.put(livro.getId(), livro);
+	}
+	
+	public void atualizarLivro(Livro livro) {
+		if(livros.containsKey(livro.getId())) {
+			livros.put(livro.getId(), livro);
+		}		
 	}
 
 }
