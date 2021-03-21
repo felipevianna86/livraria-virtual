@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class LivroRepository {
 	
@@ -17,6 +18,12 @@ public class LivroRepository {
 	
 	public List<Livro> getLivros(){
 		return new ArrayList<Livro>(livros.values());
+	}
+	
+	public Livro getLivroByIsbn(String isbn) {
+		Optional<Livro> livro = livros.values().stream().filter(l -> l.getIsbn().equals(isbn)).findAny();
+		
+		return livro.orElse(null);
 	}
 
 }
