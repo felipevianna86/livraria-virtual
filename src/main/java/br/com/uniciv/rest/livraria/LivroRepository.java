@@ -29,5 +29,9 @@ public class LivroRepository {
 		
 		return livro.get();
 	}
+	
+	public void adicionarLivro(Livro livro) {
+		livros.put(livro.getId(), livro);
+	}
 
 }
